@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.devback.products.entities.Product;
-import com.devback.products.repositories.ProductRepository;
 import com.devback.products.services.ProductService;
 
 @RestController
@@ -20,18 +19,15 @@ public class ProductResource {
 	@Autowired
 	private ProductService productService;
 	
-	@Autowired
-	private ProductRepository productRepository;
-
 	@GetMapping
 	public ResponseEntity<List<Product>> findAll() {
-		List<Product> list = productRepository.findAll();
+		List<Product> list = productService.findAll();
 		return ResponseEntity.ok().body(list);
 	}
 
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Product> findById(@PathVariable Long id) {
-		Product category = productRepository.findById(id).get();
+		Product category = productService.findById(id);
 		return ResponseEntity.ok().body(category);
 	}
 }
