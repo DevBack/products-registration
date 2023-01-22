@@ -11,10 +11,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.devback.products.entities.Product;
 import com.devback.products.repositories.ProductRepository;
+import com.devback.products.services.ProductService;
 
 @RestController
 @RequestMapping(value = "/products")
 public class ProductResource {
+	
+	@Autowired
+	private ProductService productService;
 	
 	@Autowired
 	private ProductRepository productRepository;
