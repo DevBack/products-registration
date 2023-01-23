@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.devback.products.entities.Product;
 import com.devback.products.repositories.ProductRepository;
+import com.devback.products.services.exceptions.EntityNotFoundException;
 
 @Service
 public class ProductService {
@@ -15,7 +16,8 @@ public class ProductService {
 	private ProductRepository productRepository;
 
 	public Product findById(Long id) {
-		return productRepository.findById(id).get();
+		return productRepository.findById(id).orElseThrow(
+				() -> new EntityNotFoundException("Id Not Found: " + id));
 	}
 	
 	public List<Product> findAll(){
